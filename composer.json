@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "LaravelEnso\\Charts\\": "src/"
+            "LaravelEnso\\TrackWho\\": "src/"
         }
     }
 }
