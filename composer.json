@@ -1,0 +1,13 @@
+{
+    "name": "laravel-enso/trackwho",
+    "description": "Trait for tracking created_by, updated_by and deleted_by",
+    "type": "trait",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mishu",
+            "email": "mishu@xtelecom.ro"
+        }
+    ],
+    "require": {}
+}
