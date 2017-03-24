@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\TrackWho\Traits;
+namespace LaravelEnso\TrackWho\App\Traits;
 
 trait CreatedBy
 {
