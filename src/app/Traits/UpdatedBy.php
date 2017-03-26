@@ -6,11 +6,11 @@ trait UpdatedBy
 {
     protected static function bootUpdatedBy()
     {
-        static::creating(function ($model) {
+        self::creating(function ($model) {
             $model->updated_by = \Auth::user()->id;
         });
 
-        static::updating(function ($model) {
+        self::updating(function ($model) {
             $model->updated_by = \Auth::user()->id;
         });
     }
