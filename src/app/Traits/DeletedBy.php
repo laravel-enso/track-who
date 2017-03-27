@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\TrackWho\App\Traits;
+namespace LaravelEnso\TrackWho\app\Traits;
 
 trait DeletedBy
 {

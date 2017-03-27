@@ -12,7 +12,7 @@ Trait for tracking created_by, updated_by and deleted_by.
 In the Model where you want to track the user who created, updated or deleted the model (for softdeletes) add
 
 ```
-use LaravelEnso\TrackWho\App\Traits\TrackWho
+use LaravelEnso\TrackWho\app\Traits\TrackWho
 ```
 
 Make sure that the model's table has the created_by / updated_by / deleted_by fields
