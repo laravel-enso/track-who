@@ -13,7 +13,7 @@ trait DeletedBy
         });
     }
 
-    public function deletedBy()
+    public function deleted_by()
     {
         return $this->belongsTo(config('auth.providers.users.model'), 'deleted_by');
     }
