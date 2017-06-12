@@ -8,16 +8,16 @@ Trait for tracking created_by, updated_by and deleted_by.
 
 ### Use
 
-In the Model where you want to track the creating, updating or deleting user add
+1. In the Model where you want to track the creating, updating or deleting user add
 
 ```
 use CreatedBy, UpdatedBy, DeletedBy
 ```
 
-Make sure that the model's table has the `created_by` | `updated_by` | `deleted_by` field(s)
-
-The traits will also create relationships with the User model so you can call `$model->created_by`
+2. Make sure that the model's table has the `created_by` | `updated_by` | `deleted_by` field(s)
 
 ### Note
+
+The traits will also create relationships with the User model so you can call `$model->created_by`
 
 The laravel-enso/core package comes with this library included.
