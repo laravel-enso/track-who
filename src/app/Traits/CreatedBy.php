@@ -7,7 +7,7 @@ trait CreatedBy
     protected static function bootCreatedBy()
     {
         self::creating(function ($model) {
-            $model->created_by = \Auth::user()->id;
+            $model->created_by = auth()->user()->id;
         });
     }
 

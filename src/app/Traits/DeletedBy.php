@@ -8,8 +8,6 @@ trait DeletedBy
     {
         self::deleting(function ($model) {
             $model->deleted_by = \Auth::user()->id;
-
-            $model->save();
         });
     }
 
