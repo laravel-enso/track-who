@@ -4,7 +4,7 @@
 [![Total Downloads](https://poser.pugx.org/laravel-enso/trackwho/downloads)](https://packagist.org/packages/laravel-enso/trackwho)
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/trackwho/version)](https://packagist.org/packages/laravel-enso/trackwho)
 
-Trait for tracking the user who is authoring the create, update or delete operation for a model. 
+Create, update and delete authoring tracking dependency for [Laravel Enso](https://github.com/laravel-enso/Enso). 
 
 ### Use
 
@@ -16,9 +16,13 @@ Trait for tracking the user who is authoring the create, update or delete operat
 
 2. Make sure that the model's table has the `created_by` | `updated_by` | `deleted_by` field(s)
 
-### Note
+### Notes
 
-The traits will also create relationships with the `User` model so you can call `$model->createdBy`, `$model->updatedBy`, `$model->deletedBy`.
+The traits will also define relationships with the `User` model so you can call `$model->createdBy`, `$model->updatedBy`, `$model->deletedBy`.
 `DeletedBy` can be useful where you are using soft deletes.
 
-The [laravel-enso/core](https://github.com/laravel-enso/Core) package comes with this library included.
+The [Laravel Enso Core](https://github.com/laravel-enso/Core) package comes with this package included.
+
+### Contributions
+
+are welcome

@@ -1,11 +1,11 @@
 {
     "name": "laravel-enso/trackwho",
-    "description": "Trait for tracking created_by, updated_by and deleted_by",
-    "type": "trait",
+    "description": "Create, update and delete authoring tracking dependency for Laravel Enso",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "mishu",
+            "name": "Mishu",
             "email": "mishu@xtelecom.ro"
         }
     ],
