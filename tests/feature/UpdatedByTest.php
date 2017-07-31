@@ -1,6 +1,5 @@
 <?php
 
-use App\User;
 use Faker\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -10,7 +9,6 @@ use LaravelEnso\TrackWho\app\Traits\UpdatedBy;
 
 class UpdatedByTest extends TestHelper
 {
-
     use DatabaseMigrations;
 
     private $faker;

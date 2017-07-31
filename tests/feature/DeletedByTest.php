@@ -27,7 +27,7 @@ class DeletedByTest extends TestHelper
     public function adds_deleted_by_when_deleting()
     {
         $createdTestModel = TestModel::create([
-            'name' => $this->faker->word
+            'name' => $this->faker->word,
             ]);
 
         $createdTestModel->delete();
@@ -52,5 +52,5 @@ class TestModel extends Model
     use SoftDeletes, DeletedBy;
 
     protected $fillable = ['name'];
-    protected $dates    = ['deleted_at'];
+    protected $dates = ['deleted_at'];
 }
