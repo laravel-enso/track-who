@@ -24,9 +24,9 @@ class DeletedByTest extends TestHelper
     }
 
     /** @test */
-    public function adds_deleted_by_when_deleting()
+    public function adds_deleted_by_when_deleting_model()
     {
-        $createdTestModel = TestModel::create([
+    $createdTestModel = DeletedByTestModel::create([
             'name' => $this->faker->word,
             ]);
 
@@ -37,7 +37,7 @@ class DeletedByTest extends TestHelper
 
     private function createTestModelsTable()
     {
-        Schema::create('test_models', function ($table) {
+        Schema::create('deleted_by_test_models', function ($table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('deleted_by')->nullable();
@@ -47,7 +47,7 @@ class DeletedByTest extends TestHelper
     }
 }
 
-class TestModel extends Model
+class DeletedByTestModel extends Model
 {
     use SoftDeletes, DeletedBy;
 
