@@ -23,16 +23,16 @@ class CreatedByTest extends TestHelper
     }
 
     /** @test */
-    public function adds_created_by_when_creating()
+    public function adds_created_by_when_creating_model()
     {
-        $createdTestModel = TestModel::create(['name' => $this->faker->word]);
+        $createdTestModel = CreatedByTestModel::create(['name' => $this->faker->word]);
 
         $this->assertEquals(auth()->user()->fresh(), $createdTestModel->createdBy);
     }
 
     private function createTestModelsTable()
     {
-        Schema::create('test_models', function ($table) {
+        Schema::create('created_by_test_models', function ($table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('created_by')->unsigned();
@@ -41,7 +41,7 @@ class CreatedByTest extends TestHelper
     }
 }
 
-class TestModel extends Model
+class CreatedByTestModel extends Model
 {
     use CreatedBy;
 

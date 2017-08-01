@@ -22,21 +22,21 @@ class UpdatedByTest extends TestHelper
     }
 
     /** @test */
-    public function adds_updated_by_when_creating()
+    public function adds_updated_by_when_creating_model()
     {
         $this->signIn();
 
-        $createdTestModel = TestModel::create(['name' => $this->faker->word]);
+        $createdTestModel = UpdatedByTestModel::create(['name' => $this->faker->word]);
 
         $this->assertEquals(auth()->user()->fresh(), $createdTestModel->updatedBy);
     }
 
     /** @test */
-    public function adds_updated_by_when_updating()
+    public function adds_updated_by_when_updating_model()
     {
         auth()->logout();
         $this->signIn(factory('App\User')->create());
-        $createdTestModel = TestModel::create(['name' => $this->faker->word]);
+        $createdTestModel = UpdatedByTestModel::create(['name' => $this->faker->word]);
 
         $createdTestModel->name = 'Updated';
         $createdTestModel->save();
@@ -46,7 +46,7 @@ class UpdatedByTest extends TestHelper
 
     private function createTestModelsTable()
     {
-        Schema::create('test_models', function ($table) {
+        Schema::create('updated_by_test_models', function ($table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('updated_by')->unsigned();
@@ -55,7 +55,7 @@ class UpdatedByTest extends TestHelper
     }
 }
 
-class TestModel extends Model
+class UpdatedByTestModel extends Model
 {
     use UpdatedBy;
 
