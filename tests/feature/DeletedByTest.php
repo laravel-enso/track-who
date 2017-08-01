@@ -26,7 +26,7 @@ class DeletedByTest extends TestHelper
     /** @test */
     public function adds_deleted_by_when_deleting_model()
     {
-    $createdTestModel = DeletedByTestModel::create([
+        $createdTestModel = DeletedByTestModel::create([
             'name' => $this->faker->word,
             ]);
 
