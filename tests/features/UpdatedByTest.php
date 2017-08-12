@@ -34,8 +34,7 @@ class UpdatedByTest extends TestHelper
     /** @test */
     public function adds_updated_by_when_updating_model()
     {
-        auth()->logout();
-        $this->signIn(factory('App\User')->create());
+        $this->signIn();
         $createdTestModel = UpdatedByTestModel::create(['name' => $this->faker->word]);
 
         $createdTestModel->name = 'Updated';
