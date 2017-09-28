@@ -3,14 +3,15 @@
 use Faker\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TrackWho\app\Traits\DeletedBy;
+use Tests\TestCase;
 
-class DeletedByTest extends TestHelper
+class DeletedByTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase, SignIn;
 
     protected $faker;
 
@@ -28,7 +29,7 @@ class DeletedByTest extends TestHelper
     {
         $createdTestModel = DeletedByTestModel::create([
             'name' => $this->faker->word,
-            ]);
+        ]);
 
         $createdTestModel->delete();
 
@@ -52,5 +53,5 @@ class DeletedByTestModel extends Model
     use SoftDeletes, DeletedBy;
 
     protected $fillable = ['name'];
-    protected $dates = ['deleted_at'];
+    protected $dates    = ['deleted_at'];
 }
