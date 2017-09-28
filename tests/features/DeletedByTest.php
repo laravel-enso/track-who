@@ -53,5 +53,5 @@ class DeletedByTestModel extends Model
     use SoftDeletes, DeletedBy;
 
     protected $fillable = ['name'];
-    protected $dates    = ['deleted_at'];
+    protected $dates = ['deleted_at'];
 }
