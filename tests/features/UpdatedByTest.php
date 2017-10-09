@@ -2,15 +2,14 @@
 
 use Faker\Factory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\TestHelper\app\Traits\SignIn;
+use LaravelEnso\TestHelper\app\Classes\TestHelper;
 use LaravelEnso\TrackWho\app\Traits\UpdatedBy;
-use Tests\TestCase;
 
-class UpdatedByTest extends TestCase
+class UpdatedByTest extends TestHelper
 {
-    use RefreshDatabase, SignIn;
+    use DatabaseMigrations;
 
     private $faker;
 
