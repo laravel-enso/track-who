@@ -8,12 +8,14 @@ trait DeletedBy
     {
         self::deleting(function ($model) {
             $model->deleted_by = auth()->user()->id;
-            $model->save();
         });
     }
 
     public function deletedBy()
     {
-        return $this->belongsTo(config('auth.providers.users.model'), 'deleted_by');
+        return $this->belongsTo(
+            config('auth.providers.users.model'),
+            'deleted_by'
+        );
     }
 }

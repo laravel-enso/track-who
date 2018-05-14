@@ -17,6 +17,9 @@ trait UpdatedBy
 
     public function updatedBy()
     {
-        return $this->belongsTo(config('auth.providers.users.model'), 'updated_by');
+        return $this->belongsTo(
+            config('auth.providers.users.model'),
+            'updated_by'
+        );
     }
 }
