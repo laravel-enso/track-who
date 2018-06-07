@@ -23,25 +23,18 @@ class UpdatedByTest extends TestCase
     }
 
     /** @test */
-    public function adds_updated_by_when_creating_model()
-    {
-        $this->signIn();
-
-        $createdTestModel = UpdatedByTestModel::create(['name' => $this->faker->word]);
-
-        $this->assertEquals(auth()->user()->fresh(), $createdTestModel->updatedBy);
-    }
-
-    /** @test */
     public function adds_updated_by_when_updating_model()
     {
         $this->signIn();
-        $createdTestModel = UpdatedByTestModel::create(['name' => $this->faker->word]);
 
-        $createdTestModel->name = 'Updated';
-        $createdTestModel->save();
+        $testModel = UpdatedByTestModel::create(['name' => 'initial']);
 
-        $this->assertEquals(auth()->user()->fresh(), $createdTestModel->fresh()->updatedBy);
+        $testModel->update(['name' => 'changed']);
+
+        $this->assertEquals(
+            auth()->user()->id,
+            $testModel->fresh()->updated_by
+        );
     }
 
     private function createTestModelsTable()
@@ -49,7 +42,7 @@ class UpdatedByTest extends TestCase
         Schema::create('updated_by_test_models', function ($table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('updated_by')->unsigned();
+            $table->integer('updated_by')->unsigned()->nullable();
             $table->timestamps();
         });
     }

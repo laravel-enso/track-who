@@ -7,7 +7,15 @@ trait DeletedBy
     protected static function bootDeletedBy()
     {
         self::deleting(function ($model) {
-            $model->deleted_by = auth()->user()->id;
+            $events = $model->getEventDispatcher();
+
+            tap($model)->unsetEventDispatcher()
+                ->forceFill(
+                    $model->getOriginal()
+                + ['deleted_by' => auth()->user()->id]
+            )->save();
+
+            $model->setEventDispatcher($events);
         });
     }
 

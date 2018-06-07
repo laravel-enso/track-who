@@ -27,20 +27,23 @@ class DeletedByTest extends TestCase
     /** @test */
     public function adds_deleted_by_when_deleting_model()
     {
-        $createdTestModel = DeletedByTestModel::create([
-            'name' => $this->faker->word,
-        ]);
+        $testModel = DeletedByTestModel::create();
 
-        $createdTestModel->delete();
+        $testModel->delete();
 
-        $this->assertTrue($createdTestModel->trashed());
+        $testModel = DeletedByTestModel::withTrashed()
+            ->first();
+
+        $this->assertEquals(
+            auth()->user()->fresh(),
+            $testModel->deletedBy
+        );
     }
 
     private function createTestModelsTable()
     {
         Schema::create('deleted_by_test_models', function ($table) {
             $table->increments('id');
-            $table->string('name');
             $table->integer('deleted_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -51,7 +54,4 @@ class DeletedByTest extends TestCase
 class DeletedByTestModel extends Model
 {
     use SoftDeletes, DeletedBy;
-
-    protected $fillable = ['name'];
-    protected $dates = ['deleted_at'];
 }

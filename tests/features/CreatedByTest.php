@@ -26,16 +26,18 @@ class CreatedByTest extends TestCase
     /** @test */
     public function adds_created_by_when_creating_model()
     {
-        $createdTestModel = CreatedByTestModel::create(['name' => $this->faker->word]);
+        $testModel = CreatedByTestModel::create();
 
-        $this->assertEquals(auth()->user()->fresh(), $createdTestModel->createdBy);
+        $this->assertEquals(
+            auth()->user()->id,
+            $testModel->created_by
+        );
     }
 
     private function createTestModelsTable()
     {
         Schema::create('created_by_test_models', function ($table) {
             $table->increments('id');
-            $table->string('name');
             $table->integer('created_by')->unsigned();
             $table->timestamps();
         });
@@ -45,6 +47,4 @@ class CreatedByTest extends TestCase
 class CreatedByTestModel extends Model
 {
     use CreatedBy;
-
-    protected $fillable = ['name'];
 }
