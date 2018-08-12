@@ -1,13 +1,14 @@
 <?php
 
+use App\User;
 use Faker\Factory;
+use Tests\TestCase;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Schema;
 use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TrackWho\app\Traits\DeletedBy;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DeletedByTest extends TestCase
 {
@@ -21,7 +22,7 @@ class DeletedByTest extends TestCase
 
         $this->faker = Factory::create();
         $this->createTestModelsTable();
-        $this->signIn();
+        $this->signIn(User::first());
     }
 
     /** @test */

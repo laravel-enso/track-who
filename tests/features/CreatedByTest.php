@@ -1,12 +1,13 @@
 <?php
 
+use App\User;
 use Faker\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TrackWho\app\Traits\CreatedBy;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreatedByTest extends TestCase
 {
@@ -20,7 +21,7 @@ class CreatedByTest extends TestCase
 
         $this->faker = Factory::create();
         $this->createTestModelsTable();
-        $this->signIn();
+        $this->signIn(User::first());
     }
 
     /** @test */

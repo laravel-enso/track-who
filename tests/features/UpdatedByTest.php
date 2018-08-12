@@ -1,12 +1,13 @@
 <?php
 
+use App\User;
 use Faker\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TrackWho\app\Traits\UpdatedBy;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdatedByTest extends TestCase
 {
@@ -25,7 +26,7 @@ class UpdatedByTest extends TestCase
     /** @test */
     public function adds_updated_by_when_updating_model()
     {
-        $this->signIn();
+        $this->signIn(User::first());
 
         $testModel = UpdatedByTestModel::create(['name' => 'initial']);
 
