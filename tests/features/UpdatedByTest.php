@@ -19,8 +19,13 @@ class UpdatedByTest extends TestCase
     {
         parent::setUp();
 
+        // $this->withoutExceptionHandling();
+
+        $this->seed()
+            ->createTestModelsTable()
+            ->signIn(User::first());
+
         $this->faker = Factory::create();
-        $this->createTestModelsTable();
     }
 
     /** @test */
@@ -46,6 +51,8 @@ class UpdatedByTest extends TestCase
             $table->integer('updated_by')->unsigned()->nullable();
             $table->timestamps();
         });
+
+        return $this;
     }
 }
 

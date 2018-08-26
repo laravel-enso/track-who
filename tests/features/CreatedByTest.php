@@ -19,9 +19,13 @@ class CreatedByTest extends TestCase
     {
         parent::setUp();
 
+        // $this->withoutExceptionHandling();
+
+        $this->seed()
+            ->createTestModelsTable()
+            ->signIn(User::first());
+
         $this->faker = Factory::create();
-        $this->createTestModelsTable();
-        $this->signIn(User::first());
     }
 
     /** @test */
@@ -42,6 +46,8 @@ class CreatedByTest extends TestCase
             $table->integer('created_by')->unsigned();
             $table->timestamps();
         });
+
+        return $this;
     }
 }
 

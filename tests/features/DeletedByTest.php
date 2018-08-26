@@ -20,9 +20,13 @@ class DeletedByTest extends TestCase
     {
         parent::setUp();
 
+        // $this->withoutExceptionHandling();
+
+        $this->seed()
+            ->createTestModelsTable()
+            ->signIn(User::first());
+
         $this->faker = Factory::create();
-        $this->createTestModelsTable();
-        $this->signIn(User::first());
     }
 
     /** @test */
@@ -49,6 +53,8 @@ class DeletedByTest extends TestCase
             $table->softDeletes();
             $table->timestamps();
         });
+
+        return $this;
     }
 }
 
