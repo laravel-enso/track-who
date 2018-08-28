@@ -11,7 +11,7 @@ class TrackWho extends JsonResource
     {
         return [
             'id' => $this->id,
-            'avatarId' => $this->whenLoaded('avatar', $this->avatar->id)
+            'avatarId' => $this->whenLoaded('avatar', $this->avatar->id),
         ] +
         (new ResourceAttributeMapper(
             $this,
