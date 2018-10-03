@@ -43,7 +43,7 @@ class CreatedByTest extends TestCase
     {
         Schema::create('created_by_test_models', function ($table) {
             $table->increments('id');
-            $table->integer('created_by')->unsigned();
+            $table->integer('created_by')->unsigned()->nullable();
             $table->timestamps();
         });
 

@@ -12,7 +12,7 @@ trait DeletedBy
             tap($model)->unsetEventDispatcher()
                 ->forceFill(
                     $model->getOriginal()
-                    + ['deleted_by' => auth()->user()->id]
+                    + ['deleted_by' => optional(auth()->user())->id]
             )->save();
 
             $model->setEventDispatcher($events);
