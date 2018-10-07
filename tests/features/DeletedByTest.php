@@ -1,20 +1,16 @@
 <?php
 
-use App\User;
-use Faker\Factory;
 use Tests\TestCase;
+use LaravelEnso\Core\app\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TrackWho\app\Traits\DeletedBy;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DeletedByTest extends TestCase
 {
-    use RefreshDatabase, SignIn;
-
-    protected $faker;
+    use RefreshDatabase;
 
     public function setUp()
     {
@@ -24,9 +20,7 @@ class DeletedByTest extends TestCase
 
         $this->seed()
             ->createTestModelsTable()
-            ->signIn(User::first());
-
-        $this->faker = Factory::create();
+            ->actingAs(User::first());
     }
 
     /** @test */

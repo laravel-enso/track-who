@@ -3,7 +3,6 @@
 namespace LaravelEnso\TrackWho\app\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use LaravelEnso\Helpers\app\Classes\ResourceAttributeMapper;
 
 class TrackWho extends JsonResource
 {
@@ -12,10 +11,14 @@ class TrackWho extends JsonResource
         return [
             'id' => $this->id,
             'avatarId' => $this->whenLoaded('avatar', $this->avatar->id),
-        ] +
-        (new ResourceAttributeMapper(
-            $this,
-            config('enso.trackWho.resource')
-        ))->get();
+        ] + $this->configAttributes();
+    }
+
+    private function configAttributes()
+    {
+        return collect(config('enso.trackWho.resourcePersonAttributes'))
+            ->map(function ($attribute) {
+                return $this->whenLoaded('person', $this->person->{$attribute});
+            })->toArray();
     }
 }
