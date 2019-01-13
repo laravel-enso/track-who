@@ -14,8 +14,7 @@ trait CreatedBy
     public function createdBy()
     {
         return $this->belongsTo(
-            config('auth.providers.users.model'),
-            'created_by'
+            config('auth.providers.users.model'), 'created_by'
         );
     }
 }
