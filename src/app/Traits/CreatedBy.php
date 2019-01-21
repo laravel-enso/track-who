@@ -2,6 +2,8 @@
 
 namespace LaravelEnso\TrackWho\app\Traits;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
+
 trait CreatedBy
 {
     protected static function bootCreatedBy()
@@ -11,7 +13,7 @@ trait CreatedBy
         });
     }
 
-    public function createdBy()
+    public function createdBy() : Relation
     {
         return $this->belongsTo(
             config('auth.providers.users.model'), 'created_by'
