@@ -15,7 +15,7 @@ Create, update and delete authoring tracking dependency for [Laravel Enso](https
 
 ### Configuration & Usage
 
-Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/packages/track-who.html)
+Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/backend/track-who.html)
 
 ### Contributions
 
