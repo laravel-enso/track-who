@@ -10,7 +10,7 @@ class TrackWho extends JsonResource
     {
         return [
             'id' => $this->id,
-            'avatarId' => $this->whenLoaded('avatar', $this->avatar->id),
+            'avatarId' => $this->avatar->id,
         ] + $this->configAttributes();
     }
 
@@ -18,7 +18,7 @@ class TrackWho extends JsonResource
     {
         return collect(config('enso.trackWho.resourcePersonAttributes'))
             ->map(function ($attribute) {
-                return $this->whenLoaded('person', $this->person->{$attribute});
+                return $this->person->{$attribute};
             })->toArray();
     }
 }
