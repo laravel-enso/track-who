@@ -9,11 +9,15 @@ trait UpdatedBy
     protected static function bootUpdatedBy()
     {
         self::creating(function ($model) {
-            $model->updated_by = optional(auth()->user())->id;
+            if (auth()->user()) {
+                $model->updated_by = auth()->user()->id;
+            }
         });
 
         self::updating(function ($model) {
-            $model->updated_by = optional(auth()->user())->id;
+            if (auth()->user()) {
+                $model->updated_by = auth()->user()->id;
+            }
         });
     }
 
