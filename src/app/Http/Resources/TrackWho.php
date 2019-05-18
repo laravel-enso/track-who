@@ -11,14 +11,8 @@ class TrackWho extends JsonResource
         return [
             'id' => $this->id,
             'avatarId' => $this->avatar->id,
-        ] + $this->configAttributes();
-    }
-
-    private function configAttributes()
-    {
-        return collect(config('enso.trackWho.resourcePersonAttributes'))
-            ->map(function ($attribute) {
-                return $this->person->{$attribute};
-            })->toArray();
+            'name' => $this->person->name,
+            'appellative' => $this->person->appellative,
+        ];
     }
 }

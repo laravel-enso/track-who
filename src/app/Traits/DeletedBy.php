@@ -17,9 +17,9 @@ trait DeletedBy
 
             tap($model)->unsetEventDispatcher()
                 ->forceFill(
-                    $model->getOriginal()
-                    + ['deleted_by' => auth()->user()->id]
-            )->save();
+                    ['deleted_by' => auth()->user()->id]
+                    + $model->getOriginal()
+                )->save();
 
             $model->setEventDispatcher($events);
         });

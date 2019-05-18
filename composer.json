@@ -25,13 +25,5 @@
         "psr-4": {
             "LaravelEnso\\TrackWho\\": "src/"
         }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "LaravelEnso\\TrackWho\\AppServiceProvider"
-            ],
-            "aliases": {}
-        }
     }
 }
