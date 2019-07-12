@@ -10,8 +10,9 @@ class TrackWho extends JsonResource
     {
         return [
             'id' => $this->id,
-            'avatarId' => optional($this->whenLoaded('avatar'))->id,
-            // $this->relationLoaded('avatar') ? $this->avatar->id : null,
+            'avatarId' => $this->relationLoaded('avatar')
+                ? $this->avatar->id
+                : null,
             'name' => $this->person->name,
             'appellative' => $this->person->appellative,
         ];
