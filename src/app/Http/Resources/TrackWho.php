@@ -13,8 +13,12 @@ class TrackWho extends JsonResource
             'avatarId' => $this->relationLoaded('avatar')
                 ? $this->avatar->id
                 : null,
-            'name' => $this->person->name,
-            'appellative' => $this->person->appellative,
+            'name' => $this->relationLoaded('person')
+                ? $this->person->name
+                : null,
+            'appellative' => $this->relationLoaded('person')
+                ? $this->person->appellative
+                : null,
         ];
     }
 }
