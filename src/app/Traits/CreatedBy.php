@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\TrackWho\app\Traits;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 trait CreatedBy
@@ -9,8 +10,8 @@ trait CreatedBy
     protected static function bootCreatedBy()
     {
         self::creating(function ($model) {
-            if (auth()->user()) {
-                $model->created_by = auth()->user()->id;
+            if (Auth::user()) {
+                $model->created_by = Auth::user()->id;
             }
         });
     }

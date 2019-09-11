@@ -1,6 +1,7 @@
 <?php
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\app\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
@@ -28,7 +29,7 @@ class CreatedByTest extends TestCase
         $testModel = CreatedByTestModel::create();
 
         $this->assertEquals(
-            auth()->user()->id,
+            Auth::user()->id,
             $testModel->created_by
         );
     }

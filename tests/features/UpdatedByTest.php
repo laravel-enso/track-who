@@ -1,6 +1,7 @@
 <?php
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\app\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
@@ -30,7 +31,7 @@ class UpdatedByTest extends TestCase
         $testModel->update(['name' => 'changed']);
 
         $this->assertEquals(
-            auth()->user()->id,
+            Auth::->user()->id,
             $testModel->fresh()->updated_by
         );
     }

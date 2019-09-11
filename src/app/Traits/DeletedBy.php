@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\TrackWho\app\Traits;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 trait DeletedBy
@@ -9,7 +10,7 @@ trait DeletedBy
     protected static function bootDeletedBy()
     {
         self::deleting(function ($model) {
-            if (! auth()->user()) {
+            if (! Auth::user()) {
                 return;
             }
 
@@ -17,7 +18,7 @@ trait DeletedBy
 
             tap($model)->unsetEventDispatcher()
                 ->forceFill(
-                    ['deleted_by' => auth()->user()->id]
+                    ['deleted_by' => Auth::user()->id]
                     + $model->getOriginal()
                 )->save();
 

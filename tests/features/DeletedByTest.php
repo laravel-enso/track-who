@@ -1,6 +1,7 @@
 <?php
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\app\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
@@ -34,7 +35,7 @@ class DeletedByTest extends TestCase
             ->first();
 
         $this->assertEquals(
-            auth()->user()->fresh()->id,
+            Auth::user()->fresh()->id,
             $testModel->deleted_by
         );
     }
