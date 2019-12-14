@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\TrackWho\app\Traits;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Auth;
 
 trait CreatedBy
 {
@@ -16,7 +16,7 @@ trait CreatedBy
         });
     }
 
-    public function createdBy() : Relation
+    public function createdBy(): Relation
     {
         return $this->belongsTo(
             config('auth.providers.users.model'), 'created_by'

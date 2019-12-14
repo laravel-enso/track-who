@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\TrackWho\app\Traits;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Auth;
 
 trait UpdatedBy
 {
@@ -22,7 +22,7 @@ trait UpdatedBy
         });
     }
 
-    public function updatedBy() : Relation
+    public function updatedBy(): Relation
     {
         return $this->belongsTo(
             config('auth.providers.users.model'), 'updated_by'
