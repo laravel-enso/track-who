@@ -7,13 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 trait CreatedBy
 {
-    protected static function bootCreatedBy()
+    public static function bootCreatedBy()
     {
-        self::creating(function ($model) {
-            if (Auth::user()) {
-                $model->created_by = Auth::user()->id;
-            }
-        });
+        self::creating(fn ($model) => $model->setCreatedBy());
     }
 
     public function createdBy(): Relation
@@ -21,5 +17,12 @@ trait CreatedBy
         return $this->belongsTo(
             config('auth.providers.users.model'), 'created_by'
         );
+    }
+
+    private function setCreatedBy()
+    {
+        if (Auth::user()) {
+            $this->created_by = Auth::user()->id;
+        }
     }
 }

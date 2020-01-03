@@ -2,11 +2,11 @@
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\Auth;
-use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\Core\App\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use LaravelEnso\TrackWho\app\Traits\DeletedBy;
+use LaravelEnso\TrackWho\App\Traits\DeletedBy;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DeletedByTest extends TestCase

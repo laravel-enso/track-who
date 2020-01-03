@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\TrackWho\app\Http\Resources;
+namespace LaravelEnso\TrackWho\App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
