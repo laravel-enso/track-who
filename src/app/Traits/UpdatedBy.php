@@ -23,8 +23,6 @@ trait UpdatedBy
 
     private function setUpdatedBy()
     {
-        if (Auth::user()) {
-            $this->updated_by = Auth::user()->id;
-        }
+        $this->updated_by = optional(Auth::user())->id;
     }
 }

@@ -29,8 +29,7 @@ class CreatedByTest extends TestCase
         $testModel = CreatedByTestModel::create();
 
         $this->assertEquals(
-            Auth::user()->id,
-            $testModel->created_by
+            Auth::user()->id, $testModel->created_by
         );
     }
 

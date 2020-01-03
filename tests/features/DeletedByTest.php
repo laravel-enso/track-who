@@ -35,8 +35,7 @@ class DeletedByTest extends TestCase
             ->first();
 
         $this->assertEquals(
-            Auth::user()->fresh()->id,
-            $testModel->deleted_by
+            Auth::user()->fresh()->id, $testModel->deleted_by
         );
     }
 

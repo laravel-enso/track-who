@@ -31,8 +31,7 @@ class UpdatedByTest extends TestCase
         $testModel->update(['name' => 'changed']);
 
         $this->assertEquals(
-            Auth::user()->id,
-            $testModel->fresh()->updated_by
+            Auth::user()->id, $testModel->fresh()->updated_by
         );
     }
 
