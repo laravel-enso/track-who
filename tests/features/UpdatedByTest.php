@@ -2,10 +2,10 @@
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\Auth;
-use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\Core\App\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\TrackWho\app\Traits\UpdatedBy;
+use LaravelEnso\TrackWho\App\Traits\UpdatedBy;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdatedByTest extends TestCase
