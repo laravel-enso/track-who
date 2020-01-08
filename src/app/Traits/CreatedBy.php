@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\TrackWho\app\Traits;
+namespace LaravelEnso\TrackWho\App\Traits;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Auth;
