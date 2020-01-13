@@ -21,6 +21,8 @@ trait CreatedBy
 
     private function setCreatedBy()
     {
-        $this->created_by = optional(Auth::user())->id;
+        if (Auth::check()) {
+            $this->created_by = optional(Auth::user())->id;
+        }
     }
 }
