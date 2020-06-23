@@ -1,9 +1,10 @@
 <?php
 
-namespace LaravelEnso\TrackWho\App\Traits;
+namespace LaravelEnso\TrackWho\Traits;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 trait CreatedBy
 {
@@ -14,15 +15,15 @@ trait CreatedBy
 
     public function createdBy(): Relation
     {
-        return $this->belongsTo(
-            config('auth.providers.users.model'), 'created_by'
-        );
+        $userModel = Config::get('auth.providers.users.model');
+
+        return $this->belongsTo($userModel, 'created_by');
     }
 
     private function setCreatedBy()
     {
         if (Auth::check()) {
-            $this->created_by = optional(Auth::user())->id;
+            $this->created_by = optional(Auth::id());
         }
     }
 }

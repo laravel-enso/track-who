@@ -1,9 +1,10 @@
 <?php
 
-namespace LaravelEnso\TrackWho\App\Traits;
+namespace LaravelEnso\TrackWho\Traits;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 trait UpdatedBy
 {
@@ -16,15 +17,15 @@ trait UpdatedBy
 
     public function updatedBy(): Relation
     {
-        return $this->belongsTo(
-            config('auth.providers.users.model'), 'updated_by'
-        );
+        $userModel = Config::get('auth.providers.users.model');
+
+        return $this->belongsTo($userModel, 'updated_by');
     }
 
     private function setUpdatedBy()
     {
         if (Auth::check()) {
-            $this->updated_by = optional(Auth::user())->id;
+            $this->updated_by = optional(Auth::id());
         }
     }
 }

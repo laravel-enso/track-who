@@ -1,12 +1,12 @@
 <?php
 
-use Tests\TestCase;
-use Illuminate\Support\Facades\Auth;
-use LaravelEnso\Core\App\Models\User;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\TrackWho\App\Traits\UpdatedBy;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
+use LaravelEnso\Core\Models\User;
+use LaravelEnso\TrackWho\Traits\UpdatedBy;
+use Tests\TestCase;
 
 class UpdatedByTest extends TestCase
 {
@@ -15,8 +15,6 @@ class UpdatedByTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-
-        // $this->withoutExceptionHandling();
 
         $this->seed()
             ->createTestModelsTable()
@@ -30,9 +28,7 @@ class UpdatedByTest extends TestCase
 
         $testModel->update(['name' => 'changed']);
 
-        $this->assertEquals(
-            Auth::user()->id, $testModel->fresh()->updated_by
-        );
+        $this->assertEquals(Auth::id(), $testModel->updated_by);
     }
 
     private function createTestModelsTable()

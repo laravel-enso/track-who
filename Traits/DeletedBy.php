@@ -1,9 +1,10 @@
 <?php
 
-namespace LaravelEnso\TrackWho\App\Traits;
+namespace LaravelEnso\TrackWho\Traits;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 trait DeletedBy
 {
@@ -14,9 +15,9 @@ trait DeletedBy
 
     public function deletedBy(): Relation
     {
-        return $this->belongsTo(
-            config('auth.providers.users.model'), 'deleted_by'
-        );
+        $userModel = Config::get('auth.providers.users.model');
+
+        return $this->belongsTo($userModel, 'deleted_by');
     }
 
     private function setDeletedBy()
@@ -28,10 +29,8 @@ trait DeletedBy
         $events = $this->getEventDispatcher();
 
         tap($this)->unsetEventDispatcher()
-            ->forceFill(
-                ['deleted_by' => Auth::user()->id]
-                + $this->getOriginal()
-            )->save();
+            ->forceFill(['deleted_by' => Auth::id()] + $this->getOriginal())
+            ->save();
 
         $this->setEventDispatcher($events);
     }

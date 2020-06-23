@@ -1,13 +1,13 @@
 <?php
 
-use Tests\TestCase;
-use Illuminate\Support\Facades\Auth;
-use LaravelEnso\Core\App\Models\User;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use LaravelEnso\TrackWho\App\Traits\DeletedBy;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
+use LaravelEnso\Core\Models\User;
+use LaravelEnso\TrackWho\Traits\DeletedBy;
+use Tests\TestCase;
 
 class DeletedByTest extends TestCase
 {
@@ -17,8 +17,6 @@ class DeletedByTest extends TestCase
     {
         parent::setUp();
 
-        // $this->withoutExceptionHandling();
-
         $this->seed()
             ->createTestModelsTable()
             ->actingAs(User::first());
@@ -27,16 +25,12 @@ class DeletedByTest extends TestCase
     /** @test */
     public function adds_deleted_by_when_deleting_model()
     {
-        $testModel = DeletedByTestModel::create();
+        DeletedByTestModel::create()
+            ->delete();
 
-        $testModel->delete();
+        $testModel = DeletedByTestModel::withTrashed()->first();
 
-        $testModel = DeletedByTestModel::withTrashed()
-            ->first();
-
-        $this->assertEquals(
-            Auth::user()->fresh()->id, $testModel->deleted_by
-        );
+        $this->assertEquals(Auth::id(), $testModel->deleted_by);
     }
 
     private function createTestModelsTable()
