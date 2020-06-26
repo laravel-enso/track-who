@@ -23,7 +23,7 @@ trait CreatedBy
     private function setCreatedBy()
     {
         if (Auth::check()) {
-            $this->created_by = optional(Auth::id());
+            $this->created_by = Auth::id();
         }
     }
 }
