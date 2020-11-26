@@ -22,7 +22,7 @@ trait DeletedBy
 
     private function setDeletedBy()
     {
-        if (! Auth::user()) {
+        if (! Auth::check()) {
             return;
         }
 
