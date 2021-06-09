@@ -4,7 +4,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Core\Models\User;
 use LaravelEnso\TrackWho\Traits\CreatedBy;
 use Tests\TestCase;
 
@@ -16,9 +15,11 @@ class CreatedByTest extends TestCase
     {
         parent::setUp();
 
+        $userModel = Config::get('auth.providers.users.model');
+
         $this->seed()
             ->createTestModelsTable()
-            ->actingAs(User::first());
+            ->actingAs($userModel::first());
     }
 
     /** @test */

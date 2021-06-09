@@ -5,7 +5,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Core\Models\User;
 use LaravelEnso\TrackWho\Traits\DeletedBy;
 use Tests\TestCase;
 
@@ -17,9 +16,11 @@ class DeletedByTest extends TestCase
     {
         parent::setUp();
 
+        $userModel = Config::get('auth.providers.users.model');
+
         $this->seed()
             ->createTestModelsTable()
-            ->actingAs(User::first());
+            ->actingAs($userModel::first());
     }
 
     /** @test */
