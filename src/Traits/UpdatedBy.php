@@ -25,7 +25,7 @@ trait UpdatedBy
     private function setUpdatedBy()
     {
         if (Auth::check()) {
-            $this->updated_by = Auth::id();
+            $this->fill(['updated_by' => Auth::id()]);
         }
     }
 }
