@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\TrackWho\Traits\CreatedBy;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class CreatedByTest extends TestCase
 {
@@ -22,7 +23,7 @@ class CreatedByTest extends TestCase
             ->actingAs($userModel::first());
     }
 
-    /** @test */
+    #[Test]
     public function adds_created_by_when_creating_model()
     {
         $testModel = CreatedByTestModel::create();

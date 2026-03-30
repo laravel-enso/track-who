@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\TrackWho\Traits\DeletedBy;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class DeletedByTest extends TestCase
 {
@@ -23,7 +24,7 @@ class DeletedByTest extends TestCase
             ->actingAs($userModel::first());
     }
 
-    /** @test */
+    #[Test]
     public function adds_deleted_by_when_deleting_model()
     {
         DeletedByTestModel::create()
