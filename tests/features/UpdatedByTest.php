@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\TrackWho\Traits\UpdatedBy;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class UpdatedByTest extends TestCase
 {
@@ -22,7 +23,7 @@ class UpdatedByTest extends TestCase
             ->actingAs($userModel::first());
     }
 
-    /** @test */
+    #[Test]
     public function adds_updated_by_when_updating_model()
     {
         $testModel = UpdatedByTestModel::create(['name' => 'initial']);
