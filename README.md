@@ -1,25 +1,155 @@
 # Track Who
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b499044a68b84f339b905576570c84ab)](https://www.codacy.com/gh/laravel-enso/track-who?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/track-who&amp;utm_campaign=Badge_Grade) 
-[![StyleCI](https://github.styleci.io/repos/85499255/shield?branch=master)](https://github.styleci.io/repos/85499255)
-[![License](https://poser.pugx.org/laravel-enso/track-who/license)](https://packagist.org/packages/laravel-enso/track-who)
-[![Total Downloads](https://poser.pugx.org/laravel-enso/track-who/downloads)](https://packagist.org/packages/laravel-enso/track-who)
-[![Latest Stable Version](https://poser.pugx.org/laravel-enso/track-who/version)](https://packagist.org/packages/laravel-enso/track-who)
+[![License](https://poser.pugx.org/laravel-enso/track-who/license)](LICENSE)
+[![Stable](https://poser.pugx.org/laravel-enso/track-who/version)](https://packagist.org/packages/laravel-enso/track-who)
+[![Downloads](https://poser.pugx.org/laravel-enso/track-who/downloads)](https://packagist.org/packages/laravel-enso/track-who)
+[![PHP](https://img.shields.io/badge/php-8.0%2B-777bb4.svg)](composer.json)
+[![Issues](https://img.shields.io/github/issues/laravel-enso/track-who.svg)](https://github.com/laravel-enso/track-who/issues)
 
-Create, update and delete authoring tracking dependency for Laravel.
+## Description
 
-This package can work independently of the [Enso](https://github.com/laravel-enso/Enso) ecosystem.
+Track Who adds lightweight authoring metadata to Eloquent models.
 
-For live examples and demos, you may visit [laravel-enso.com](https://www.laravel-enso.com)
+The package exposes three traits that automatically persist the authenticated user into `created_by`, `updated_by`, and `deleted_by` columns during the corresponding model lifecycle events. This is useful for audit-friendly entities that need simple ownership or accountability metadata without a full activity log.
 
-### Installation, Configuration & Usage
+The traits work independently, so you can track only creation, only updates, only deletions, or combine them on the same model.
 
-Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/backend/track-who.html)
+## Installation
+
+This package is usually installed transitively by Enso packages that need author tracking.
+
+For standalone installation:
+
+```bash
+composer require laravel-enso/track-who
+```
+
+No service provider or config publishing is required.
+
+To use the traits, make sure your table contains the matching nullable columns:
+
+```php
+$table->unsignedInteger('created_by')->nullable();
+$table->unsignedInteger('updated_by')->nullable();
+$table->unsignedInteger('deleted_by')->nullable();
+```
+
+If you want to use `DeletedBy`, the model should also use `SoftDeletes`.
+
+## Features
+
+- Tracks the authenticated user on model creation through `CreatedBy`.
+- Tracks the authenticated user on model creation and update through `UpdatedBy`.
+- Tracks the authenticated user on soft delete through `DeletedBy`.
+- Exposes `createdBy()`, `updatedBy()`, and `deletedBy()` relations to the configured auth user model.
+- Works without additional configuration by resolving the user model from `auth.providers.users.model`.
+- Lets you opt in trait-by-trait depending on the columns available on each model.
+
+## Usage
+
+Track who created a record:
+
+```php
+use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\TrackWho\Traits\CreatedBy;
+
+class Company extends Model
+{
+    use CreatedBy;
+}
+```
+
+Track who last updated a record:
+
+```php
+use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\TrackWho\Traits\UpdatedBy;
+
+class Company extends Model
+{
+    use UpdatedBy;
+}
+```
+
+Track who deleted a soft-deletable record:
+
+```php
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use LaravelEnso\TrackWho\Traits\DeletedBy;
+
+class Company extends Model
+{
+    use SoftDeletes, DeletedBy;
+}
+```
+
+The traits also expose relations to the current auth user model:
+
+```php
+$company->createdBy;
+$company->updatedBy;
+$company->deletedBy;
+```
+
+::: warning Note
+`DeletedBy` persists the deleting user by saving the model during the delete cycle.
+
+Use it together with `SoftDeletes` and a nullable `deleted_by` column so the record remains available after deletion.
+:::
+
+## API
+
+### Traits
+
+`LaravelEnso\TrackWho\Traits\CreatedBy`
+
+- boots on `creating`
+- writes the authenticated user's id into `created_by`
+- exposes `createdBy(): Relation`
+
+`LaravelEnso\TrackWho\Traits\UpdatedBy`
+
+- boots on `creating`
+- boots on `updating`
+- writes the authenticated user's id into `updated_by`
+- exposes `updatedBy(): Relation`
+
+`LaravelEnso\TrackWho\Traits\DeletedBy`
+
+- boots on `deleting`
+- writes the authenticated user's id into `deleted_by`
+- temporarily disables the event dispatcher while persisting the value
+- exposes `deletedBy(): Relation`
+
+### Auth User Resolution
+
+All relations resolve the user model from:
+
+```php
+config('auth.providers.users.model');
+```
+
+### Required Columns
+
+Depending on the trait you apply:
+
+- `created_by`
+- `updated_by`
+- `deleted_by`
+
+For soft-delete tracking:
+
+- `deleted_at`
+
+## Depends On
+
+Framework dependency:
+
+- [`laravel/framework`](https://github.com/laravel/framework) [↗](https://github.com/laravel/framework)
 
 ## Contributions
 
 are welcome. Pull requests are great, but issues are good too.
 
-## License
-
-This package is released under the MIT license.
+Thank you to all the people who already contributed to Enso!

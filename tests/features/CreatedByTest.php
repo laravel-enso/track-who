@@ -3,10 +3,11 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\TrackWho\Traits\CreatedBy;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class CreatedByTest extends TestCase
 {
@@ -29,6 +30,24 @@ class CreatedByTest extends TestCase
         $testModel = CreatedByTestModel::create();
 
         $this->assertEquals(Auth::id(), $testModel->created_by);
+    }
+
+    #[Test]
+    public function does_not_set_created_by_for_guests()
+    {
+        auth()->forgetGuards();
+
+        $testModel = CreatedByTestModel::create();
+
+        $this->assertNull($testModel->created_by);
+    }
+
+    #[Test]
+    public function exposes_created_by_relation()
+    {
+        $testModel = CreatedByTestModel::create();
+
+        $this->assertTrue($testModel->createdBy->is(Auth::user()));
     }
 
     private function createTestModelsTable()
