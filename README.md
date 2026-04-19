@@ -5,6 +5,7 @@
 [![Downloads](https://poser.pugx.org/laravel-enso/track-who/downloads)](https://packagist.org/packages/laravel-enso/track-who)
 [![PHP](https://img.shields.io/badge/php-8.0%2B-777bb4.svg)](composer.json)
 [![Issues](https://img.shields.io/github/issues/laravel-enso/track-who.svg)](https://github.com/laravel-enso/track-who/issues)
+[![Merge Requests](https://img.shields.io/github/issues-pr/laravel-enso/track-who.svg)](https://github.com/laravel-enso/track-who/pulls)
 
 ## Description
 
@@ -24,6 +25,7 @@ For standalone installation:
 composer require laravel-enso/track-who
 ```
 
+<<<<<<< HEAD
 No service provider or config publishing is required.
 
 To use the traits, make sure your table contains the matching nullable columns:
@@ -72,10 +74,34 @@ class Company extends Model
 ```
 
 Track who deleted a soft-deletable record:
+=======
+The package is driven by model traits and expects your tables to expose the corresponding nullable foreign keys.
+
+## Features
+
+- Adds `created_by`, `updated_by`, and `deleted_by` support through dedicated traits
+- Resolves the current authenticated user automatically via `auth()->id()`
+- Updates author columns on create, update, and soft delete model events
+- Leaves existing lifecycle logic intact, so it can be combined with other model traits
+- Supports partial adoption, depending on which authoring columns a model needs
+
+## Usage
+
+Add the columns you need to your model table, for example:
+
+```php
+$table->foreignId(created_by)->nullable()->constrained(users);
+$table->foreignId(updated_by)->nullable()->constrained(users);
+$table->foreignId(deleted_by)->nullable()->constrained(users);
+```
+
+Apply the matching traits on the model:
+>>>>>>> 4ceb69d (Add merge request badge to README)
 
 ```php
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+<<<<<<< HEAD
 use LaravelEnso\TrackWho\Traits\DeletedBy;
 
 class Company extends Model
@@ -98,10 +124,26 @@ $company->deletedBy;
 Use it together with `SoftDeletes` and a nullable `deleted_by` column so the record remains available after deletion.
 :::
 
+=======
+use LaravelEnso\TrackWho\Traits\CreatedBy;
+use LaravelEnso\TrackWho\Traits\DeletedBy;
+use LaravelEnso\TrackWho\Traits\UpdatedBy;
+
+class Post extends Model
+{
+    use CreatedBy;
+    use UpdatedBy;
+    use SoftDeletes;
+    use DeletedBy;
+}
+```
+
+>>>>>>> 4ceb69d (Add merge request badge to README)
 ## API
 
 ### Traits
 
+<<<<<<< HEAD
 `LaravelEnso\TrackWho\Traits\CreatedBy`
 
 - boots on `creating`
@@ -147,6 +189,28 @@ For soft-delete tracking:
 Framework dependency:
 
 - [`laravel/framework`](https://github.com/laravel/framework) [↗](https://github.com/laravel/framework)
+=======
+- `LaravelEnso\TrackWho\Traits\CreatedBy`
+  - sets `created_by` during the model `creating` event
+- `LaravelEnso\TrackWho\Traits\UpdatedBy`
+  - sets `updated_by` during the model `updating` event
+- `LaravelEnso\TrackWho\Traits\DeletedBy`
+  - sets `deleted_by` during the model `deleting` event and saves the model before the delete operation proceeds
+
+### Required Columns
+
+- `created_by` for `CreatedBy`
+- `updated_by` for `UpdatedBy`
+- `deleted_by` for `DeletedBy`
+
+All three columns are expected to store the authenticated user id.
+
+## Depends On
+
+Required Enso packages:
+
+- [laravel-enso/helpers](https://docs.laravel-enso.com/backend/helpers.html) [↗](https://github.com/laravel-enso/helpers)
+>>>>>>> 4ceb69d (Add merge request badge to README)
 
 ## Contributions
 
