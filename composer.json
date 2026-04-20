@@ -1,6 +1,6 @@
 {
     "name": "laravel-enso/track-who",
-    "description": "Create, update and delete authoring tracking dependency for Laravel Enso",
+    "description": "Created-by, updated-by, and deleted-by tracking traits for Laravel Enso",
     "keywords": [
         "laravel-enso",
         "track-who"
@@ -8,12 +8,14 @@
     "homepage": "https://github.com/laravel-enso/track-who",
     "type": "library",
     "license": "MIT",
-    "authors": [{
-        "name": "Adrian Ocneanu",
-        "email": "aocneanu@gmail.com",
-        "homepage": "https://laravel-enso.com",
-        "role": "Developer"
-    }],
+    "authors": [
+        {
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "laravel/framework": "^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
         "php": "^8.0"
