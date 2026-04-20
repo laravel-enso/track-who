@@ -86,5 +86,6 @@ class DeletedByTest extends TestCase
 
 class DeletedByTestModel extends Model
 {
-    use SoftDeletes, DeletedBy;
+    use SoftDeletes;
+    use DeletedBy;
 }
