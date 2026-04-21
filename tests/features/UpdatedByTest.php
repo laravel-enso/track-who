@@ -64,6 +64,19 @@ class UpdatedByTest extends TestCase
         $this->assertTrue($testModel->updatedBy->is(Auth::user()));
     }
 
+    #[Test]
+    public function guest_updates_do_not_override_existing_updated_by()
+    {
+        $testModel = UpdatedByTestModel::create(['name' => 'initial']);
+        $updatedBy = $testModel->updated_by;
+
+        auth()->forgetGuards();
+
+        $testModel->update(['name' => 'changed']);
+
+        $this->assertSame($updatedBy, $testModel->fresh()->updated_by);
+    }
+
     private function createTestModelsTable()
     {
         Schema::create('updated_by_test_models', function ($table) {
